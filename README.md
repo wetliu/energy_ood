@@ -1,8 +1,8 @@
-# Energy_ood
+# Energy-based Out-of-distribution Detection (Energy OOD)
 
-Requires Python 3+ and PyTorch 0.4.1+.
+This repository is the official implementation of [Energy-based Out-of-distribution Detection]
 
-# Pretrained Models
+## Pretrained Models
 
 Please download the [pretrained models](https://github.com/hendrycks/outlier-exposure/tree/master/CIFAR/snapshots/baseline) and put them in folder
 
@@ -10,7 +10,7 @@ Please download the [pretrained models](https://github.com/hendrycks/outlier-exp
 ./CIFAR/snapshots/baseline/
 ```
 
-## How to run
+## Testing and Fine-tuning
 
 run energy score testing for cifar10 WRN
 ```test
@@ -31,6 +31,21 @@ run energy score training and testing for cifar100 WRN
 ```train
 bash run.sh energy_ft 1
 ```
+
+## Results
+
+Our model achieves the following performance on :
+
+### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet)
+
+| Model name         |     FPR95       |
+| ------------------ |---------------- |
+| Softmax score |     51.04%      |
+| Energy score  |     33.01%      |
+| Softmax score with fine-tune |     8.53%       |
+| Energy score with fine-tune|     3.32%       |
+
+
 
 ## Outlier Datasets
 
