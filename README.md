@@ -36,7 +36,7 @@ bash run.sh energy_ft 1
 
 Our model achieves the following performance on :
 
-### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet)
+### [CIFAR10](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 | Model name         |     FPR95       |
 | ------------------ |---------------- |
