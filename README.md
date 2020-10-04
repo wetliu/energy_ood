@@ -34,20 +34,32 @@ bash run.sh energy_ft 1
 
 ## Results
 
-Our model achieves the following performance on :
+Our model achieves the following average performance on 6 OOD datasets:
 
-### [CIFAR10](https://www.cs.toronto.edu/~kriz/cifar.html)
+### [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 | Model name         |     FPR95       |
 | ------------------ |---------------- |
 | Softmax score |     51.04%      |
-| Energy score  |     33.01%      |
+| Energy score (ours)  |     33.01%      |
 | Softmax score with fine-tune |     8.53%       |
-| Energy score with fine-tune|     3.32%       |
+| Energy score with fine-tune (ours) |     3.32%       |
 
+### CIFAR-10 (in-distribution) vs SVHN (out-of-distribution) Score Distributions
+
+![image](https://github.com/wetliu/demo_figs/cifar10_vs_svhn.png)
 
 
 ## Outlier Datasets
 
 These experiments make use of numerous outlier datasets. Links for less common datasets are as follows, [80 Million Tiny Images](http://horatio.cs.nyu.edu/mit/tiny/data/tiny_images.bin), [Icons-50](https://github.com/hendrycks/robustness),
 [Textures](https://www.robots.ox.ac.uk/~vgg/data/dtd/), [Chars74K](http://www.ee.surrey.ac.uk/CVSSP/demos/chars74k/EnglishImg.tgz), and [Places365](http://places2.csail.mit.edu/download.html), [LSUN-C](https://www.dropbox.com/s/fhtsw1m3qxlwj6h/LSUN.tar.gz), [LSUN-R](https://www.dropbox.com/s/moqh2wh8696c3yl/LSUN_resize.tar.gz), [iSUN](https://www.dropbox.com/s/ssz7qxfqae0cca5/iSUN.tar.gz).
+
+## Citation
+
+     @article{liu2020energy,
+          title={Energy-based Out-of-distribution Detection},
+          author={Liu, Weitang and Wang, Xiaoyun and Owens, John and Li, Yixuan},
+          journal={Advances in Neural Information Processing Systems},
+          year={2020}
+     } 
