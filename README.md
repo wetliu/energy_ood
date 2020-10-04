@@ -47,7 +47,7 @@ Our model achieves the following average performance on 6 OOD datasets:
 
 ### CIFAR-10 (in-distribution) vs SVHN (out-of-distribution) Score Distributions
 
-![image](https://github.com/wetliu/demo_figs/cifar10_vs_svhn.png)
+![image](https://github.com/wetliu/energy_ood/blob/master/demo_figs/cifar10_vs_svhn.png)
 
 
 ## Outlier Datasets
