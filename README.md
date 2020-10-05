@@ -69,7 +69,7 @@ CIFAR-100:
 | Energy score (ours)  |     73.60%      |
 | [ODIN](https://arxiv.org/abs/1706.02690)  |     74.64%       |
 | [Mahalanobis](https://arxiv.org/abs/1807.03888) | 54.64% |
-| [Outlier Exposure](https://arxiv.org/abs/1812.04606)|   58/10%   |
+| [Outlier Exposure](https://arxiv.org/abs/1812.04606)|   58.10%   |
 | Energy score with fine-tune (ours) |     47.55%       |
 
 ## Outlier Datasets
