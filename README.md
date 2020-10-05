@@ -1,6 +1,8 @@
 # Energy-based Out-of-distribution Detection (Energy OOD)
 
-This repository is the official implementation of [Energy-based Out-of-distribution Detection]
+This repository is the official implementation of [Energy-based Out-of-distribution Detection]()
+
+![image](https://github.com/wetliu/energy_ood/blob/master/demo_figs/energy-ood.png)
 
 ## Pretrained Models
 
@@ -36,7 +38,7 @@ bash run.sh energy_ft 1
 
 Our model achieves the following average performance on 6 OOD datasets:
 
-### [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html)
+### 1. MSP vs energy score with and without fine-tuned on [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 | Model name         |     FPR95       |
 | ------------------ |---------------- |
@@ -45,10 +47,30 @@ Our model achieves the following average performance on 6 OOD datasets:
 | Softmax score with fine-tune |     8.53%       |
 | Energy score with fine-tune (ours) |     3.32%       |
 
-### CIFAR-10 (in-distribution) vs SVHN (out-of-distribution) Score Distributions
+### 2. CIFAR-10 (in-distribution) vs SVHN (out-of-distribution) Score Distributions
 
 ![image](https://github.com/wetliu/energy_ood/blob/master/demo_figs/cifar10_vs_svhn.png)
 
+### 3. Performance among different baselines for [WideResNet](https://arxiv.org/abs/1605.07146)
+CIFAR-10:
+| Model name         |     FPR95       |
+| ------------------ |---------------- |
+| [Softmax score](https://arxiv.org/abs/1610.02136) |     51.04%      |
+| Energy score (ours)  |     33.01%      |
+| [ODIN](https://arxiv.org/abs/1706.02690)  |     35.71%       |
+| [Mahalanobis](https://arxiv.org/abs/1807.03888) | 37.08% |
+| [Outlier Exposure](https://arxiv.org/abs/1812.04606)|  8.53%    |
+| Energy score with fine-tune (ours) |     3.32%       |
+
+CIFAR-100:
+| Model name         |     FPR95       |
+| ------------------ |---------------- |
+| [Softmax score](https://arxiv.org/abs/1610.02136) |     80.41%      |
+| Energy score (ours)  |     73.60%      |
+| [ODIN](https://arxiv.org/abs/1706.02690)  |     74.64%       |
+| [Mahalanobis](https://arxiv.org/abs/1807.03888) | 54.64% |
+| [Outlier Exposure](https://arxiv.org/abs/1812.04606)|   58/10%   |
+| Energy score with fine-tune (ours) |     47.55%       |
 
 ## Outlier Datasets
 
