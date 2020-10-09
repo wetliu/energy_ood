@@ -4,12 +4,18 @@ This repository is the official implementation of [Energy-based Out-of-distribut
 
 ![image](https://github.com/wetliu/energy_ood/blob/master/demo_figs/energy-ood.png)
 
-## Pretrained Models
+## Pretrained Models and Datasets
 
-Please download the [pretrained models](https://github.com/hendrycks/outlier-exposure/tree/master/CIFAR/snapshots/baseline) and put them in folder
+Pretrained models are provided in folder
 
 ```
-./CIFAR/snapshots/baseline/
+./CIFAR/snapshots/
+```
+
+Please download the datasets in folder
+
+```
+./data/
 ```
 
 ## Testing and Fine-tuning
