@@ -1,6 +1,6 @@
 # Energy-based Out-of-distribution Detection (Energy OOD)
 
-This repository is the official implementation of [Energy-based Out-of-distribution Detection](https://arxiv.org/abs/2010.03759) by W. Liu, X. Wang, J. Owens, Y. Li. This method is an effective and easy OOD detector with and without fine-tuning. Our code is modified from [OE](https://github.com/hendrycks/outlier-exposure).
+This repository is the official implementation of [Energy-based Out-of-distribution Detection](https://arxiv.org/abs/2010.03759) by W. Liu, X. Wang, J. Owens, Y. Li. This method is an effective and easy OOD detector with and without fine-tuning. Our code is modified from [Outlier-Exposure](https://github.com/hendrycks/outlier-exposure).
 
 ![image](https://github.com/wetliu/energy_ood/blob/master/demo_figs/energy-ood.png)
 
