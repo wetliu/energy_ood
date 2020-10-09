@@ -260,7 +260,7 @@ print('\n\nPlaces365 Detection')
 get_and_print_results(ood_loader)
 
 # /////////////// LSUN-C ///////////////
-ood_data = dset.ImageFolder(root="../data/LSUN",
+ood_data = dset.ImageFolder(root="../data/LSUN_C",
                             transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]))
 ood_loader = torch.utils.data.DataLoader(ood_data, batch_size=args.test_bs, shuffle=True,
                                          num_workers=1, pin_memory=True)
@@ -268,7 +268,7 @@ print('\n\nLSUN_C Detection')
 get_and_print_results(ood_loader)
 
 # /////////////// LSUN-R ///////////////
-ood_data = dset.ImageFolder(root="../data/LSUN_Resize",
+ood_data = dset.ImageFolder(root="../data/LSUN_resize",
                             transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]))
 ood_loader = torch.utils.data.DataLoader(ood_data, batch_size=args.test_bs, shuffle=True,
                                          num_workers=1, pin_memory=True)
