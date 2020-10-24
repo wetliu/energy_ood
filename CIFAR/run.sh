@@ -43,7 +43,6 @@ elif [ "$1" = "OE" ] || [ "$1" = "energy_ft" ]; then # fine-tuning
         score=energy
     fi	
     for dm in ${data_models[$2]}; do
-        # Training with outlier exposure, KL with uniform
 	array=(${dm//_/ })
 	data=${array[0]}
 	model=${array[1]}
