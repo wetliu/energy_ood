@@ -42,8 +42,8 @@ parser.add_argument('--layers', default=40, type=int, help='total number of laye
 parser.add_argument('--widen-factor', default=2, type=int, help='widen factor')
 parser.add_argument('--droprate', default=0.3, type=float, help='dropout probability')
 # Checkpoints
-parser.add_argument('--save', '-s', type=str, default='./snapshots/oe_tune', help='Folder to save checkpoints.')
-parser.add_argument('--load', '-l', type=str, default='./snapshots/baseline', help='Checkpoint path to resume / test.')
+parser.add_argument('--save', '-s', type=str, default='./snapshots/', help='Folder to save checkpoints.')
+parser.add_argument('--load', '-l', type=str, default='./snapshots/pretrained', help='Checkpoint path to resume / test.')
 parser.add_argument('--test', '-t', action='store_true', help='Test only flag.')
 # Acceleration
 parser.add_argument('--ngpu', type=int, default=1, help='0 = CPU.')
@@ -54,7 +54,14 @@ parser.add_argument('--m_out', type=float, default=-7., help='margin for out-dis
 parser.add_argument('--score', type=str, default='OE', help='OE|energy')
 parser.add_argument('--seed', type=int, default=1, help='seed for np(tinyimages80M sampling); 1|2|8|100|107')
 args = parser.parse_args()
-args.save = args.save+'_'+args.score
+
+
+if args.score == 'OE':
+    save_info = 'oe_tune'
+elif args.score == 'energy':
+    save_info = 'energy_ft'
+
+args.save = args.save+save_info
 if os.path.isdir(args.save) == False:
     os.mkdir(args.save)
 state = {k: v for k, v in args._get_kwargs()}
@@ -123,7 +130,7 @@ if args.load != '':
     for i in range(1000 - 1, -1, -1):
         
         model_name = os.path.join(args.load, args.dataset + calib_indicator + '_' + args.model +
-                                  '_baseline_epoch_' + str(i) + '.pt')
+                                  '_pretrained_epoch_' + str(i) + '.pt')
         if os.path.isfile(model_name):
             net.load_state_dict(torch.load(model_name))
             print('Model restored! Epoch:', i)
@@ -186,9 +193,6 @@ def train():
         if args.score == 'energy':
             Ec_out = -torch.logsumexp(x[len(in_set[0]):], dim=1)
             Ec_in = -torch.logsumexp(x[:len(in_set[0])], dim=1)
-            if args.m_out==0:
-                args.m_out = float(Ec_out.mean().cpu().detach().numpy())
-                print('energy in and out bounds are', args.m_in, args.m_out)
             loss += 0.1*(torch.pow(F.relu(Ec_in-args.m_in), 2).mean() + torch.pow(F.relu(args.m_out-Ec_out), 2).mean())
         elif args.score == 'OE':
             loss += 0.5 * -(x[len(in_set[0]):].mean(1) - torch.logsumexp(x[len(in_set[0]):], dim=1)).mean()
@@ -198,8 +202,6 @@ def train():
 
         # exponential moving average
         loss_avg = loss_avg * 0.8 + float(loss) * 0.2
-    if args.score == 'energy':
-        print(Ec_in.mean(), Ec_out.mean())
     state['train_loss'] = loss_avg
 
 
@@ -238,8 +240,8 @@ if not os.path.exists(args.save):
 if not os.path.isdir(args.save):
     raise Exception('%s is not a dir' % args.save)
 
-with open(os.path.join(args.save, args.dataset + calib_indicator + '_' + args.model + '_' + args.score + '_s' + str(args.seed) +
-                                  '_oe_tune_training_results.csv'), 'w') as f:
+with open(os.path.join(args.save, args.dataset + calib_indicator + '_' + args.model + '_s' + str(args.seed) +
+                                  '_' + save_info+'_training_results.csv'), 'w') as f:
     f.write('epoch,time(s),train_loss,test_loss,test_error(%)\n')
 
 print('Beginning Training\n')
@@ -252,20 +254,20 @@ for epoch in range(0, args.epochs):
 
     train()
     test()
-
+ 
     # Save model
     torch.save(net.state_dict(),
-               os.path.join(args.save, args.dataset + calib_indicator + '_' + args.model + '_' + args.score + '_s' + str(args.seed) +
-                            '_oe_tune_epoch_' + str(epoch) + '.pt'))
-    # Let us not waste space and delete the previous model
-    prev_path = os.path.join(args.save, args.dataset + calib_indicator + '_' + args.model + '_' + args.score + '_s' + str(args.seed) +
-                             '_oe_tune_epoch_' + str(epoch - 1) + '.pt')
+               os.path.join(args.save, args.dataset + calib_indicator + '_' + args.model + '_s' + str(args.seed) +
+                            '_' + save_info + '_epoch_' + str(epoch) + '.pt'))
+    
+               # Let us not waste space and delete the previous model
+    prev_path = os.path.join(args.save, args.dataset + calib_indicator + '_' + args.model + '_s' + str(args.seed) +
+                             '_' + save_info + '_epoch_'+ str(epoch - 1) + '.pt')
     if os.path.exists(prev_path): os.remove(prev_path)
 
     # Show results
-
-    with open(os.path.join(args.save, args.dataset + calib_indicator + '_' + args.model + '_' + args.score + '_s' + str(args.seed) +
-                                      '_oe_tune_training_results.csv'), 'a') as f:
+    with open(os.path.join(args.save, args.dataset + calib_indicator + '_' + args.model + '_s' + str(args.seed) +
+                                      '_' + save_info + '_training_results.csv'), 'a') as f:
         f.write('%03d,%05d,%0.6f,%0.5f,%0.2f\n' % (
             (epoch + 1),
             time.time() - begin_epoch,

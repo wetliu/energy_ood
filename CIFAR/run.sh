@@ -1,4 +1,4 @@
-methods=(baseline oe_tune)
+methods=(pretrained oe_tune)
 data_models=(cifar10_wrn cifar100_wrn)
 gpu=0
 
@@ -37,7 +37,7 @@ elif [ "$1" = "Odin" ]; then
 	done
         echo "||||Odin temperature|||||||||||||||||||||||||||||||||||||||||||"
     done
-elif [ "$1" = "OE" ] || [ "$1" = "energy_ft" ]; then # fine-tuning
+elif [ "$1" = "oe_tune" ] || [ "$1" = "energy_ft" ]; then # fine-tuning
     score=OE
     if [ "$1" = "energy_ft" ]; then # fine-tuning
         score=energy
@@ -47,7 +47,7 @@ elif [ "$1" = "OE" ] || [ "$1" = "energy_ft" ]; then # fine-tuning
 	data=${array[0]}
 	model=${array[1]}
         for seed in 1; do
-	    echo "---Training------"$data"-----"$model"---"$seed"---"$score"---------"
+	    echo "---Training with dataset: "$data"---model used:"$model"---seed: "$seed"---score used:"$score"---------"
             if [ "$2" = "0" ]; then
 		m_out=-5
 		m_in=-23
@@ -56,11 +56,11 @@ elif [ "$1" = "OE" ] || [ "$1" = "energy_ft" ]; then # fine-tuning
 		m_in=-27
 	    fi
 	            echo "---------------"$m_in"------"$m_out"--------------------"
-	            python train.py $data --model $model --score $score --seed $seed --m_in $m_in --m_out $m_out
-	            python test.py --method_name ${dm}_${score}_s${seed}_oe_tune --num_to_avg 10 --score $score -v
+	            CUDA_VISIBLE_DEVICES=$gpu python train.py $data --model $model --score $score --seed $seed --m_in $m_in --m_out $m_out
+	            CUDA_VISIBLE_DEVICES=$gpu python test.py --method_name ${dm}_s${seed}_$1 --num_to_avg 10 --score $score
         done
     done
-    echo "||||||||done with training OE above"$1"|||||||||||||||||||"
+    echo "||||||||done with training above "$1"|||||||||||||||||||"
 elif [ "$1" = "T" ]; then
     for dm in ${data_models[@]}; do
         for method in ${methods[0]}; do

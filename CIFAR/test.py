@@ -74,13 +74,12 @@ start_epoch = 0
 # Restore model
 if args.load != '':
     for i in range(1000 - 1, -1, -1):
-        if 'baseline' in args.method_name:
-            subdir = 'baseline'
+        if 'pretrained' in args.method_name:
+            subdir = 'pretrained'
         elif 'oe_tune' in args.method_name:
-            if 'energy' in args.method_name:
-                subdir = 'oe_tune_energy'
-            else:
-                subdir = 'oe_tune_OE'
+            subdir = 'oe_tune'
+        elif 'energy_ft' in args.method_name:
+            subdir = 'energy_ft'
         else:
             subdir = 'oe_scratch'
         
