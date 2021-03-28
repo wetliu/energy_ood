@@ -1,6 +1,6 @@
 # Energy-based Out-of-distribution Detection (Energy OOD)
 
-This repository is the official implementation of [Energy-based Out-of-distribution Detection](https://arxiv.org/abs/2010.03759) by W. Liu, X. Wang, J. Owens, Y. Li. This method is an effective and easy OOD detector with and without fine-tuning. Our code is modified from [Outlier-Exposure](https://github.com/hendrycks/outlier-exposure).
+This repository is the official implementation of [Energy-based Out-of-distribution Detection](https://arxiv.org/abs/2010.03759) by Weitang Liu, Xiaoyun Wang, John Owens and Yixuan Li. This method is an effective and easy OOD detector with and without fine-tuning. Our code is modified from [Outlier-Exposure](https://github.com/hendrycks/outlier-exposure).
 
 ![image](https://github.com/wetliu/energy_ood/blob/master/demo_figs/energy-ood.png)
 
@@ -80,8 +80,8 @@ CIFAR-100:
 
 ## Outlier Datasets
 
-These experiments make use of numerous outlier datasets. Links for less common datasets are as follows, [80 Million Tiny Images](http://horatio.cs.nyu.edu/mit/tiny/data/tiny_images.bin), [Icons-50](https://github.com/hendrycks/robustness),
-[Textures](https://www.robots.ox.ac.uk/~vgg/data/dtd/), [Chars74K](http://www.ee.surrey.ac.uk/CVSSP/demos/chars74k/EnglishImg.tgz), and [Places365](http://places2.csail.mit.edu/download.html), [LSUN-C](https://www.dropbox.com/s/fhtsw1m3qxlwj6h/LSUN.tar.gz), [LSUN-R](https://www.dropbox.com/s/moqh2wh8696c3yl/LSUN_resize.tar.gz), [iSUN](https://www.dropbox.com/s/ssz7qxfqae0cca5/iSUN.tar.gz).
+These experiments make use of numerous outlier datasets. Links for less common datasets are as follows, [80 Million Tiny Images](http://horatio.cs.nyu.edu/mit/tiny/data/tiny_images.bin)
+[Textures](https://www.robots.ox.ac.uk/~vgg/data/dtd/), [Places365](http://places2.csail.mit.edu/download.html), [LSUN-C](https://www.dropbox.com/s/fhtsw1m3qxlwj6h/LSUN.tar.gz), [LSUN-R](https://www.dropbox.com/s/moqh2wh8696c3yl/LSUN_resize.tar.gz), [iSUN](https://www.dropbox.com/s/ssz7qxfqae0cca5/iSUN.tar.gz) and SVHN.
 
 ## Citation
 
